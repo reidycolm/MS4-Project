@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    background: url('/media/basketball_background.jpg') no-repeat center center fixed;
+    background: url('/media/basketball_background1.jpg') no-repeat center 50px fixed;
     background-size: cover;
     height: calc(100vh - 164px);
     color: #555;
@@ -63,6 +63,13 @@ body {
   .container {
     max-width: 80%;
   }
+}
+
+@media (min-width: 1046px) {
+
+    .fa-basketball-ball {
+        display: none;
+    }
 }
 
 /* fixed top navbar only on medium and up */
