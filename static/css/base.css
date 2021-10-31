@@ -131,7 +131,28 @@ a.category-badge > span.badge:hover {
     }
 
     .delivery-banner h4{
-        font-size: 19px;
+        font-size: 16px;
     }
 }
+
+@media (max-width: 450px) {
+    body{
+        height: calc(100vh - 150px);
+    }
+    .nav-link{
+        font-size: 0.8rem;
+    }
+    a.nav-link{
+        padding: 0.1rem;
+    }
+    .nav-link i.fa-lg{
+        font-size: 1rem;
+    }
+    .navbar-toggler-icon{
+        padding: .5rem 0.5rem;
+        font-size: 1.5rem;
+    }
+    .view-store-button {
+        min-width: 130px;
+    }
 }
