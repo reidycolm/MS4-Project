@@ -51,7 +51,7 @@
                         <div class="form-row">
                             {% with product.has_sizes as s %}
                                 {% if s %}
-                                    {% if product.category.name == 'basketball' or 'air_jordans' or 'casual' %}
+                                    {% if product.category.name == 'basketball' or product.category.name == 'air_jordans' or product.category.name == 'casual' %}
                                         <div class="col-12">
                                             <p><strong>Size:</strong></p>
                                             <select class="form-control rounded-0 w-50" name="product_size" id='id_product_size'>
