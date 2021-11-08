@@ -201,5 +201,18 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12 col-lg-7 py-3 align-right">
+                <!-- buttons to return to profile -->
+                {% if from_profile %}
+                    <a href="{% url 'profile' %}" class="btn text-capitalize rounded-2 py-2 btn-bg-col btn-text">
+                        <span class="icon mr-2">
+                            <i class="fas fa-hand-point-left"></i>
+                        </span><br/>
+                        <span class="text-capitalize btn-text-size">Back to Profile</span>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
     </div>
 {% endblock %}
