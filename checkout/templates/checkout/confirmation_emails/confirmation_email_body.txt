@@ -1,0 +1,21 @@
+Hi {{ order.full_name }}!
+
+This is a confirmation email for your order from Hoop Dreams. Your order information is found below.
+
+Order Number: {{ order.order_number }}
+Order Date: {{ order.date }}
+
+Order total: €{{ order.order_total }}
+Delivery: €{{ order.delivery_cost }}
+Grand total: €{{ order.grand_total }}
+
+Your order will be shipped to {{ order.street_address1 }} in {{ order.town_or_city }}, {{ order.country }}.
+
+Your contact number is listed as: {{ order.phone_number }}
+
+if you have any questions or queries then please contact us at {{ contact_email }}.
+
+Thanks for your purchase.
+
+Best wishes,
+Hoop Dreams
