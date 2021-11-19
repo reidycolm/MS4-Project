@@ -1,6 +1,6 @@
 from django import forms
 from .widgets import CustomFileInput
-from .models import Product, Category
+from .models import Product, Category, Review
 
 
 class ProductForm(forms.ModelForm):
@@ -23,3 +23,8 @@ class ProductForm(forms.ModelForm):
         self.fields['category'].choices = friendly_names
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'border-black rounded-1'
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ('comment',)

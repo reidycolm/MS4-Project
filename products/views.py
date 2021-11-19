@@ -4,8 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
 
-from .models import Product, Category
-from .forms import ProductForm
+from .models import Product, Category, Review
+from .forms import ProductForm, ReviewForm
 
 # Create your views here.
 
@@ -64,9 +64,11 @@ def product_detail(request, product_id):
     """ A view to show individual product details """
 
     product = get_object_or_404(Product, pk=product_id)
+    reviews = Review.objects.filter(product=product_id)
 
     context = {
         'product': product,
+        'reviews': reviews,
     }
 
     return render(request, 'products/product_detail.html', context)
@@ -143,3 +145,24 @@ def delete_product(request, product_id):
     messages.success(request, 'Product deleted!')
 
     return redirect(reverse('products'))
+
+
+def add_review(request, product_id):
+    if request.user.is_authenticated:
+        product = get_object_or_404(Product, pk=product_id)
+        if request.method == "POST":
+            form = ReviewForm(request.POST or None)
+            if form.is_valid():
+                data = form.save(commit=False)
+                data.comment = request.POST['comment']
+                data.user = request.user
+                data.product = product
+                data.save()
+                messages.success(request, 'Your review was has been posted :)')
+                return redirect(reverse('product_detail', args=[product.id]))
+        else:
+            form = ReviewForm()
+        return render(request, 'products/product_detail.html', {"form": form})
+    else:
+        messages.error(request, 'Sorry, you need to be logged in to leave reviews')
+        return redirect(reverse('home'))

@@ -127,6 +127,22 @@
         </div>
     </div>
 </div>
+<br>
+<div class="container card text-center">
+    <div class="card-body">
+        <h3>Reviews</h3>
+        <form action="{% url 'add_review' product.id %}" method="POST">
+                {% csrf_token %}
+            <textarea name="comment" id="comment" cols="20" rows="5" class="form-control"></textarea>
+            <br>
+            <input type="submit" class="btn btn-outline-black rounded-0 mt-1" value="Submit">
+        </form>
+        {% for review in reviews %}
+            <h6>{{ review.user }}</h6>
+            <p>{{ review.comment }}</p>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
 
 {% block postloadjs %}
