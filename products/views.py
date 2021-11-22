@@ -64,7 +64,7 @@ def product_detail(request, product_id):
     """ A view to show individual product details """
 
     product = get_object_or_404(Product, pk=product_id)
-    reviews = Review.objects.filter(product=product_id)
+    reviews = Review.objects.filter(product=product_id).order_by('-comment')
 
     context = {
         'product': product,
@@ -166,3 +166,30 @@ def add_review(request, product_id):
     else:
         messages.error(request, 'Sorry, you need to be logged in to leave reviews')
         return redirect(reverse('home'))
+
+
+def edit_review(request, product_id, review_id):
+    if request.user.is_authenticated:
+        product = Product.objects.get(id=product_id)
+        review = get_object_or_404(Review, product=product, pk=review_id)
+
+        # check if review was done by logged in user
+        if request.user == review.user:
+            # grant permisson to edit
+            if request.method == "POST":
+                form = ReviewForm(request.POST, instance=review)
+                if form.is_valid():
+                    data = form.save(commit=False)
+                    data.save()
+                    messages.success(request, 'Your review was has been updated :)')
+                    return redirect('product_detail', product.id)
+            else:
+                form = ReviewForm(instance=review)
+            return render(request, 'products/edit_review.html', {"form": form})
+        else:
+            messages.error(request,
+                           'You do not have permission to edit this review')
+            return redirect('product_details', product_id)
+    else:
+        messages.error(request, 'Sorry, you need to be logged in to edit reviews')
+        return redirect('home')

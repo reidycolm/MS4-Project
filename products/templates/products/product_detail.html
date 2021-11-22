@@ -129,18 +129,35 @@
 </div>
 <br>
 <div class="container card text-center">
+    <h2 class="mt-5"><u>Reviews</u></h2>
     <div class="card-body">
-        <h3>Reviews</h3>
-        <form action="{% url 'add_review' product.id %}" method="POST">
-                {% csrf_token %}
-            <textarea name="comment" id="comment" cols="20" rows="5" class="form-control"></textarea>
-            <br>
-            <input type="submit" class="btn btn-outline-black rounded-0 mt-1" value="Submit">
-        </form>
         {% for review in reviews %}
-            <h6>{{ review.user }}</h6>
-            <p>{{ review.comment }}</p>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h5 class="text-left">{{ review.user }}</h5>
+                            <a href="{% url 'edit_review' product.id review.id %}">Edit</a>
+                        </div>
+                        <div class="col-md-7">
+                            <p class="text-left">{{ review.comment }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
         {% endfor %}
+        <div class="card">
+            <h2 class="mt-5"><u>Add Review</u></h2>
+            <div class="card-body">
+                <form class="my-auto" action="{% url 'add_review' product.id %}" method="POST">
+                        {% csrf_token %}
+                    <textarea name="comment" id="comment" cols="20" rows="5" class="form-control"></textarea>
+                    <br>
+                    <input type="submit" class="btn btn-outline-black rounded-0 mt-1" value="Submit">
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
