@@ -129,7 +129,7 @@
 </div>
 <br>
 <div class="container card text-center">
-    <h2 class="mt-5"><u>Reviews</u></h2>
+    <h3 class="mt-5"><u>Reviews</u></h3>
     <div class="card-body">
         {% for review in reviews %}
             <div class="card">
@@ -148,9 +148,11 @@
                 </div>
             </div>
             <br>
+        {% empty %}
+            <p><i>Currently, there are no reviews for this product</i></p>
         {% endfor %}
         <div class="card">
-            <h2 class="mt-5"><u>Add Review</u></h2>
+            <h3 class="mt-5"><u>Add Review</u></h3>
             <div class="card-body">
                 <form class="my-auto" action="{% url 'add_review' product.id %}" method="POST">
                         {% csrf_token %}
