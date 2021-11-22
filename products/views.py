@@ -193,3 +193,19 @@ def edit_review(request, product_id, review_id):
     else:
         messages.error(request, 'Sorry, you need to be logged in to edit reviews')
         return redirect('product_detail', product_id)
+
+
+def delete_review(request, product_id, review_id):
+    if request.user.is_authenticated:
+        product = Product.objects.get(id=product_id)
+        review = get_object_or_404(Review, product=product, pk=review_id)
+
+        # check if review was done by logged in user
+        if request.user == review.user:
+            #grant permission to delete
+            review.delete()
+        messages.success(request, 'Your review was has been deleted')
+        return redirect('product_detail', product_id)
+    else:
+        messages.error(request, 'Sorry, you need to be logged in to delete reviews')
+        return redirect('product_detail', product_id)
