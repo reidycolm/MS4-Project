@@ -189,7 +189,7 @@ def edit_review(request, product_id, review_id):
         else:
             messages.error(request,
                            'You do not have permission to edit this review')
-            return redirect('product_details', product_id)
+            return redirect('product_detail', product_id)
     else:
         messages.error(request, 'Sorry, you need to be logged in to edit reviews')
-        return redirect('home')
+        return redirect('product_detail', product_id)

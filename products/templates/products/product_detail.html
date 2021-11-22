@@ -137,7 +137,9 @@
                     <div class="row">
                         <div class="col-md-5">
                             <h5 class="text-left">{{ review.user }}</h5>
+                            {% if request.user == review.user %}
                             <a href="{% url 'edit_review' product.id review.id %}">Edit</a>
+                            {% endif %}
                         </div>
                         <div class="col-md-7">
                             <p class="text-left">{{ review.comment }}</p>
