@@ -54,17 +54,10 @@
             </div>
         </li>
 
-        <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black" href="#" id="specials-link" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Special Offers
+        <li class="nav-item">
+            <a  href="{% url 'view_blog' %}" class="logo-font font-weight-bold nav-link text-black" id="blog-link" >
+                Blog
             </a>
-            <div class="dropdown-menu border-0" aria-labelledby="specials-link">
-                <a href="{% url 'products' %}?category=new_arrivals" class="dropdown-item">New Arrivals</a>
-                <a href="{% url 'products' %}?category=deals" class="dropdown-item">Deals</a>
-                <a href="{% url 'products' %}?category=clearance" class="dropdown-item">Clearance</a>
-                <a href="{% url 'products' %}?category=new_arrivals,deals,clearence" class="dropdown-item">All Specials</a>
-            </div>
         </li>
     </ul>
 </div>
