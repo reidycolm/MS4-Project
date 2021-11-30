@@ -52,3 +52,34 @@ def add_blog_post(request):
     }
 
     return render(request, template, context)
+
+
+def edit_blog_post(request, post_id):
+    if not request.user.is_superuser:
+        messages.error(request,
+                       'Sorry, only Admins can edit a blog post')
+        return redirect(reverse('home'))
+
+    post = get_object_or_404(Post, pk=post_id)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.user = request.user
+            form.save()
+            messages.success(request, 'Blog Post Updated!')
+            return redirect(reverse('blog_post', args=[post.slug]))
+        else:
+            messages.error(request,
+                           'Could not add your post to the site. \
+                           Please ensure form is valid!')
+    else:
+        form = PostForm(instance=post)
+
+    template = 'blog/edit_blog_post.html'
+    context = {
+        'form': form,
+        'post': post,
+    }
+
+    return render(request, template, context)
