@@ -19,18 +19,39 @@
 {% block content %}
 <div class="container">
     <div class="row">
+        <div class="col text-center text-white mt-3">
+            <h2 class="logo-font">Our Blog</h2>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-8 mt-3 left">
             {% for post in posts %}
-            <div class="card mb-4">
+            <div class="card blog-card mb-4">
                 <div class="card-body">
                     <h2 class="card-title">{{ post.title }}</h2>
                     <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}} </p>
                     <p class="card-text">{{post.content|slice:":200" }}</p>
                     <a href="{% url 'blog_post' post.slug  %}" class="btn btn-primary">Read More &rarr;</a>
+                    {% if request.user.is_superuser %}
+                    <div class="float-right mt-1">
+                        <a href="#">Edit</a>
+                        <a href="#" class="text-danger" onclick="return confirm('Are you sure you want to delete this review?')">Delete</a>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}
         </div>
+    </div>
+    <div class="row">
+        {% if request.user.is_superuser %}
+        <div class="col-md-12">
+                <form class="my-auto" action="{% url 'add_blog_post' %}" method="POST">
+                    {% csrf_token %}
+                    <button class="btn-lg btn-white text-black rounded-0" type="submit"><i class="fas fa-plus"></i> Add Blog Post?</button>
+                </form>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
