@@ -292,6 +292,10 @@ input[name='q']::placeholder {
     body {
         height: calc(100vh - 116px);
     }
+
+    .footer-p {
+        font-size: 13px;
+    }
 }
 
 /* Change font size of headings on homepage */

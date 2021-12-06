@@ -150,9 +150,52 @@
   {% block postloadjs %}
   <script type="text/javascript">
     $('.toast').toast('show');
+
+    $(window).scroll(function() {
+    if ($(this).scrollTop() > 50) {
+        $('.delivery-banner').css({
+            'display': 'none'
+        });
+      }
+    });
+
   </script>
   {% endblock %}
 
+  <footer class="page-footer bg-white text-black">
+    <hr>
+    <div class="container text-center text-md-left mt-5">
+      <div class="row">
+  
+        <div class="col-md-4 mx-auto mb-4">
+          <h6 class="text-uppercase font-weight-bold">About</h6>
+          <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 125px; height: 2px">
+          <p class="mt-2 footer-p">Hoop Dreams is an exciting new Irish company dedicated to providing you with the best deals on every basketball related product you can think of. </p>
+        </div>
+  
+        <div class="col-md-4 mx-auto mb-4">
+          <h6 class="text-uppercase font-weight-bold">Contact</h6>
+          <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 75px; height: 2px">
+            <ul class="list-unstyled footer-p">
+              <li class="my-2"><i class="fas fa-home mr-3"></i> 23, The Spa, Kerry, Ireland</li>
+              <li class="my-2"><i class="fas fa-envelope mr-3"></i> hoopdreams@example.com</li>
+              <li class="my-2"><i class="fas fa-phone mr-3"></i> 068 123 4567</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row py-4 d-flex align-items-center">
+       
+        <div class="col-md-12 text-center"> 
+            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f text-black mr-4"> </i></a>         
+            <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter text-black mr-4"> </i></a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram text-black mr-4"> </i></a>
+            <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in text-black mr-4"> </i></a> 
+        </div>
+     </div>
+    </div>
 
 </body>
 
